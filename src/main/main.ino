@@ -13,7 +13,7 @@ void loop () {
     int value = digitalRead(pinLed);
     digitalWrite(pinLed, !value);
     Serial.print("LED: ");
-    if (!value)
+    if (value)
       Serial.println("ON");
     else
       Serial.println("OFF");
