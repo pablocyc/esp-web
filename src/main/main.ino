@@ -1,12 +1,14 @@
-#define pinLed    LED_BUILTIN
+#define pinLed      LED_BUILTIN
+#define pinButton   D3
 
 void setup () {
   pinMode(pinLed, OUTPUT);
+  pinMode(pinButton, INPUT);
 }
 
 void loop () {
-  digitalWrite(pinLed, HIGH);
-  delay(500);
-  digitalWrite(pinLed, LOW);
-  delay(500);
+  if (!digitalRead(pinButton)) {
+    digitalWrite(pinLed, !digitalRead(pinLed));
+    while(!digitalRead(pinButton));
+  }
 }
