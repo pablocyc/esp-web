@@ -4,11 +4,20 @@
 void setup () {
   pinMode(pinLed, OUTPUT);
   pinMode(pinButton, INPUT);
+  Serial.begin(9600);
+  Serial.println("WebServer - nodemcu");
 }
 
 void loop () {
   if (!digitalRead(pinButton)) {
-    digitalWrite(pinLed, !digitalRead(pinLed));
+    int value = digitalRead(pinLed);
+    digitalWrite(pinLed, !value);
+    Serial.print("LED: ");
+    if (!value)
+      Serial.println("ON");
+    else
+      Serial.println("OFF");
+    
     while(!digitalRead(pinButton));
   }
 }
