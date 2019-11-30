@@ -1,6 +1,10 @@
+// Libraries
+#include <Adafruit_NeoPixel.h>
+
 // Constants
-#define pinLed      LED_BUILTIN
-#define pinButton   D8
+#define pinPixel      D4
+#define numPixels     5
+#define pinButton     D8
 #define option_limit  5
 
 // Variables
@@ -11,11 +15,15 @@ unsigned long current_time;
 unsigned long double_click_time = 700;
 bool press_active;
 
+// Init
+Adafruit_NeoPixel pixels(numPixels, pinPixel, NEO_GRB + NEO_KHZ800);
+
 void setup () {
-  pinMode(pinLed, OUTPUT);
   pinMode(pinButton, INPUT);
+  pixels.begin();
   Serial.begin(9600);
   Serial.println("WebServer - nodemcu");
+  pixels.clear();
 }
 
 void loop () {
@@ -46,10 +54,16 @@ void ReadButton () {
 void ledToggle (int pos) {
   option_array[pos] = !option_array[pos];
   int value = option_array[pos];
-  if (value)
+  if (value) {
     Serial.println(String(pos) + ": ON");
-  else
+    pixels.setPixelColor(pos, pixels.Color(170, 0, 255));
+    pixels.show();
+  }
+  else {
     Serial.println(String(pos) + ": OFF");
+    pixels.setPixelColor(pos, pixels.Color(0, 0, 0));
+    pixels.show();
+  }
 }
 
 void showOptions () {
