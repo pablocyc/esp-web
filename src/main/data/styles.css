@@ -1,0 +1,35 @@
+body {
+  background: #eee;
+  font-size: 24px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.range-slider {
+  -webkit-appearance: none;
+  width: 30%;
+  height: 10px;
+  background: #d7dcdf;
+  border-radius: 5px;
+}
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #2c3e50;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.range-slider::-webkit-slider-thumb:hover {
+  background: #1abc9c;
+}
+
+@media screen and (max-width: 414px) {
+  .range-slider {
+    width: 50%;
+  }
+}
